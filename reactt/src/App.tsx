@@ -5,6 +5,8 @@ import axios from 'axios';
 interface IUsers {
   id: number;
   userName: string;
+  email: string;
+  phone: string;
 }
 
 function App() {
@@ -26,7 +28,7 @@ function App() {
     <div className="App">
       <ul>
         {users.map(user => (
-          <li key={user.id}>{user.id} - {user.userName}</li>
+          <li key={user.id}>{user.userName} - {user.email} - - {user.phone}</li>
         ))}
       </ul>
     </div>
