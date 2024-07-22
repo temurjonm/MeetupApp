@@ -9,4 +9,8 @@ public class AppUsers
 
     public string? Phone { get; set; }
 
+    public required Byte[] PasswordHash { get; set; }
+    
+    public required Byte[] PasswordSalt { get; set; }
+
 }
