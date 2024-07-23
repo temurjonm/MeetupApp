@@ -4,3 +4,8 @@ export interface IUsers {
     email: String;
     phone: String;
 }
+
+export interface User {
+    username: string;
+    token: string;
+}
