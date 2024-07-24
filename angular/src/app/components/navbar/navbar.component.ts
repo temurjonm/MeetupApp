@@ -2,16 +2,20 @@ import { Component, OnInit, inject } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ReactiveFormsModule, BsDropdownModule],
+  imports: [ReactiveFormsModule, BsDropdownModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
   accountService = inject(AccountService);
+  private router = inject(Router);
+  private toastr = inject(ToastrService);
   loginForm!: FormGroup;
   userInfo = {};
 
@@ -25,14 +29,15 @@ export class NavbarComponent implements OnInit {
   handleLogin() {
     this.accountService.login(this.loginForm.getRawValue())
       .subscribe({
-        next: response => {
-          console.log(response);
+        next: () => {
+          this.router.navigateByUrl("/members");
         },
-        error: error => console.error(error)
+        error: error => this.toastr.error(error.error)
       })
   }
 
   logout() {
     this.accountService.logout();
+    this.router.navigateByUrl("/");
   }
 }
