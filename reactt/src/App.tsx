@@ -6,8 +6,6 @@ import { Navbar } from './components/navbar/Navbar';
 interface IUsers {
   id: number;
   userName: string;
-  email: string;
-  phone: string;
 }
 
 function App() {

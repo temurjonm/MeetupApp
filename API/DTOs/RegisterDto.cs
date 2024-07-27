@@ -10,10 +10,4 @@ public class RegisterDto
 
     [StringLength(6, MinimumLength = 4)]
     public required string Password { get; set; }
-
-    [EmailAddress]
-    public string? Email { get; set; }
-
-    [Phone]
-    public string? Phone { get; set; }
 }

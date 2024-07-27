@@ -3,6 +3,7 @@ using System.Text;
 using API.Data;
 using API.DTOs;
 using API.Entities;
+using API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@ public class AccountController(DataContext context, ITokenService tokenService):
             return BadRequest("Username is taken!");
         }
 
+        /*
         using var hmac = new HMACSHA512();
         var user = new AppUsers {
             UserName = registerDto.Username.ToLower(),
@@ -34,6 +36,8 @@ public class AccountController(DataContext context, ITokenService tokenService):
             Username = user.UserName,
             Token = tokenService.CreateToken(user)
         };
+        */
+        return Ok();
     }
 
     [HttpPost("login")]
