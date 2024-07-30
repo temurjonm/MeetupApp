@@ -1,0 +1,28 @@
+@mixin card-transform($sl) {
+    transform: scale($sl, $sl);
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+  }
+  
+  .card:hover img {
+    @include card-transform(1.2);
+  }
+  
+  .card img {
+    @include card-transform(1.0);
+  }
+
+  .card-img-wrapper {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .member-icons {
+    position: absolute;
+    bottom:  -30%;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
+    opacity: 0;
+  }

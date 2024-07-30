@@ -1,16 +1,14 @@
-import { Injectable, inject } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IUsers } from "../models/users.model";
-import { HttpClient } from "@angular/common/http";
+import { BaseService } from "./base.service";
 
 
 @Injectable({
     providedIn: 'root'
 })
-export class UserService {
-    http = inject(HttpClient);
-    baseUrl = 'http://localhost:5000/api/';
-
+export class UserService extends BaseService {
+    
     getUsers(): Observable<IUsers[]> {
         return this.http.get<IUsers[]>(this.baseUrl + '/account/login');
     }
