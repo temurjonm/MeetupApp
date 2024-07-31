@@ -5,6 +5,7 @@ import { MemberDetailComponent } from './components/members/member-detail/member
 import { ListsComponent } from './components/lists/lists.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { authGuard } from './guards/auth.guard';
+import { MemberEditComponent } from './components/members/member-edit/member-edit.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -15,6 +16,7 @@ export const routes: Routes = [
         children: [
             {path: 'members', component: MemberListComponent},
             {path: 'members/:id', component: MemberDetailComponent},
+            {path: 'member/edit', component: MemberEditComponent},
             {path: 'lists', component: ListsComponent},
             {path: 'messages', component: MessagesComponent},
         ]
