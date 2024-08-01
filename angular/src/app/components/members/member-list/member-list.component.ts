@@ -1,7 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { MemberService } from '../../../services/member.service';
-import { Observable } from 'rxjs';
-import { IMember } from '../../../models/members.model';
 import { AsyncPipe } from '@angular/common';
 import { MemberCardComponent } from "../member-card/member-card.component";
 
@@ -14,11 +12,16 @@ import { MemberCardComponent } from "../member-card/member-card.component";
 })
 export class MemberListComponent implements OnInit {
   
-  private _memberService = inject(MemberService);
-  members$!: Observable<IMember[]>;
+  memberService = inject(MemberService);
 
   ngOnInit(): void {
-    this.members$ = this._memberService.getMembers();
+    if (this.memberService.members().length === 0) {
+      this.loadMembers();
+    }
+  }
+
+  loadMembers() {
+    this.memberService.getMembers();
   }
 
 }

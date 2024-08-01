@@ -4,11 +4,14 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { AccountService } from './services/account.service';
 import { HomeComponent } from "./components/home/home.component";
+import { NgxSpinnerComponent } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgFor, NgIf, AsyncPipe, NavbarComponent, HomeComponent],
+  imports: [RouterOutlet, NgFor, NgIf, 
+    AsyncPipe, NavbarComponent, HomeComponent, NgxSpinnerComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
