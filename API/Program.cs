@@ -1,7 +1,6 @@
-using System.Text;
-using API;
 using API.Data;
 using API.Extensions;
+using API.Helpers;
 using API.Middleware;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +13,7 @@ builder.Services.AddIdentityService(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
 var app = builder.Build();
 

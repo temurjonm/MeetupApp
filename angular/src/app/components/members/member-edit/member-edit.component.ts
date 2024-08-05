@@ -1,17 +1,18 @@
 import { Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { AccountService } from '../../../services/account.service';
 import { MemberService } from '../../../services/member.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { IMember } from '../../../models/members.model';
-import { AsyncPipe, DatePipe, NgIf } from '@angular/common';
+import { AsyncPipe, DatePipe, JsonPipe, NgIf } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [AsyncPipe, NgIf, TabsModule, DatePipe, FormsModule],
+  imports: [AsyncPipe, NgIf, TabsModule, DatePipe, FormsModule, PhotoEditorComponent, JsonPipe],
   templateUrl: './member-edit.component.html',
   styleUrls: ['./member-edit.component.scss']
 })
@@ -53,5 +54,9 @@ export class MemberEditComponent implements OnInit {
         this._toastr.error("Failed to update profile. Please try again.");
       }
     });
+  }
+
+  onMemberChange(event: IMember) {
+    
   }
 }
