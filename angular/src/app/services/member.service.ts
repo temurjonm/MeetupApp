@@ -2,7 +2,8 @@ import { Injectable, signal } from '@angular/core';
 import { BaseService } from './base.service';
 import { IMember } from '../models/members.model';
 import { IUsers } from '../models/users.model';
-import { of, tap } from 'rxjs';
+import { map, of, tap } from 'rxjs';
+import { IPhoto } from '../models/photo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,34 @@ export class MemberService extends BaseService {
       );
     }
 
-}
+    setMainPhoto(photo: IPhoto) {
+      if (!photo || !photo.id) {
+        throw new Error('Invalid photo');
+      }
+      return this.http.put<void>(`${this.baseUrl}users/set-main-photo/${photo.id}`, {})
+      .pipe(
+        tap(() => {
+          this.members.update(members => members?.map(m => {
+              if (m.photos?.includes(photo)) {
+                m.photoUrl = photo.url;
+              }
+              return m;
+          }) || []);
+      }));
+    }
+
+    deletePhoto(photo: IPhoto) {
+      return this.http.delete<void>(`${this.baseUrl}users/delete-photo/${photo.id}`)
+      .pipe(
+        map(() => {
+          this.members.update(members => members?.map(m => {
+            if (m.photos?.includes(photo)) {
+              m.photos = m.photos?.filter(p => p.id !== photo.id);
+            }
+            return m;
+          }))
+        })
+      )
+    }
+
+  }

@@ -8,4 +8,5 @@ export interface IUsers {
 export interface User {
     username: string;
     token: string;
+    photoUrl?: string;
 }

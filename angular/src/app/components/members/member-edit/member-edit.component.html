@@ -1,4 +1,4 @@
-<div class="row" *ngIf="member$ | async as member">
+<div class="row">
     <div class="col-4">
         <h1>Your profile</h1>
     </div>
@@ -58,7 +58,7 @@
                 </form>
             </tab>
             <tab heading="Edit photos">
-                <app-photo-editor [member]="member" (memberChange)="onMemberChange($event) />
+                <app-photo-editor [member]="member" (memberChange)="onMemberChange($event)" />
             </tab>
         </tabset>
     </div>
