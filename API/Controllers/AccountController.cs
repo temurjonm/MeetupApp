@@ -19,12 +19,11 @@ public class AccountController(DataContext context, ITokenService tokenService):
             return BadRequest("Username is taken!");
         }
 
-        /*
         using var hmac = new HMACSHA512();
-        var user = new AppUsers {
+
+        var user = new AppUsers
+        {
             UserName = registerDto.Username.ToLower(),
-            Email = registerDto.Email,
-            Phone = registerDto.Phone,
             PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
             PasswordSalt = hmac.Key
         };
@@ -32,12 +31,13 @@ public class AccountController(DataContext context, ITokenService tokenService):
         context.Users.Add(user);
         await context.SaveChangesAsync();
 
-        return new UserDto {
+        return new UserDto
+        {
             Username = user.UserName,
-            Token = tokenService.CreateToken(user)
+            Token = tokenService.CreateToken(user),
+            PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
         };
-        */
-        return Ok();
+        
     }
 
     [HttpPost("login")]

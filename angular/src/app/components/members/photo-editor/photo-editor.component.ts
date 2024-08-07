@@ -75,11 +75,6 @@ export class PhotoEditorComponent implements OnInit {
   deletePhoto(photo: IPhoto) {
     this.memberService.deletePhoto(photo).subscribe({
       next: () => {
-        const user = this.accountService.currentUser();
-        if (user) {
-          user.photoUrl = photo.url;
-          this.accountService.setCurrentUser(user);
-        }
         const updateMember = { ...this.member() };
         updateMember.photos = updateMember.photos.filter(p => p.id !== photo.id);
         this.memberChange.emit(updateMember);
