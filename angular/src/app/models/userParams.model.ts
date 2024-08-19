@@ -2,8 +2,14 @@ export class UserParams {
     gender: string;
     minAge = 18;
     maxAge = 99;
-    orderBy: string;
     pageNumber: number;
     pageSize: number;
-    search: string;
+    orderBy = 'lastActive';
+
+    constructor(user: any) {
+        this.gender = user.gender === 'female' ? 'female' : 'male';
+        this.pageNumber = 1;
+        this.pageSize = 5;
+        this.orderBy = 'lastActive';
+    }
 }

@@ -9,7 +9,7 @@ import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } fro
   templateUrl: './text-input.component.html',
   styleUrl: './text-input.component.scss'
 })
-export class TextInputComponent implements ControlValueAccessor{
+export class TextInputComponent implements ControlValueAccessor {
   label = input<string>('');
   type = input<string>('text');
 
