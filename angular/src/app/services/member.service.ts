@@ -4,9 +4,9 @@ import { IMember } from '../models/members.model';
 import { of } from 'rxjs';
 import { IPhoto } from '../models/photo.model';
 import { PaginatedResult } from '../models/pagination.model';
-import { HttpParams, HttpResponse } from '@angular/common/http';
 import { UserParams } from '../models/userParams.model';
 import { AccountService } from './account.service';
+import { setPaginatedResponse, setPaginationHeaders } from './paginationHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -25,9 +25,9 @@ export class MemberService extends BaseService {
 
     getMembers() {
       const response = this.memberCache.get(Object.values(this.userParams()).join('-'));
-      if (response) return this.setPaginatedResult(response);
+      if (response) return setPaginatedResponse(response, this.paginatedResult);
 
-      let params = this.setPaginationHeaders(this.userParams().pageNumber, this.userParams().pageSize);
+      let params = setPaginationHeaders(this.userParams().pageNumber, this.userParams().pageSize);
 
       params = params.append('minAge', this.userParams().minAge.toString());
       params = params.append('maxAge', this.userParams().maxAge.toString());
@@ -36,28 +36,10 @@ export class MemberService extends BaseService {
 
       return this.http.get<IMember[]>(this.baseUrl + 'users', {observe: 'response', params}).subscribe({
           next: response => {
-            this.setPaginatedResult(response);
+            setPaginatedResponse(response, this.paginatedResult);
             this.memberCache.set(Object.values(this.userParams()).join('-'), response); 
           }
         });
-    }
-
-    private setPaginatedResult(response: HttpResponse<IMember[]>) {
-      this.paginatedResult.set({
-        items: response.body as IMember[],
-        pagination: JSON.parse(response.headers.get('Pagination')!)
-      })
-    }
-
-    private setPaginationHeaders(pageNumber: number, pageSize: number) {
-      let params = new HttpParams();
-
-      if (pageNumber && pageSize) {
-        params = params.append('pageNumber', pageNumber.toString());
-        params = params.append('pageSize', pageSize.toString());
-      }
-
-      return params;
     }
 
     getMember(username: string) {
