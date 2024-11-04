@@ -9,18 +9,22 @@ import { MemberEditComponent } from './components/members/member-edit/member-edi
 import { preventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 export const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {
-        path: '',
-        runGuardsAndResolvers: 'always',
-        canActivate: [authGuard],
-        children: [
-            {path: 'members', component: MemberListComponent},
-            {path: 'members/:id', component: MemberDetailComponent},
-            {path: 'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
-            {path: 'lists', component: ListsComponent},
-            {path: 'messages', component: MessagesComponent},
-        ]
-    },
-    {path: '**', component: HomeComponent, pathMatch: 'full'}
+  { path: '', component: HomeComponent },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [authGuard],
+    children: [
+      { path: 'members', component: MemberListComponent },
+      { path: 'members/:id', component: MemberDetailComponent },
+      {
+        path: 'member/edit',
+        component: MemberEditComponent,
+        canDeactivate: [preventUnsavedChangesGuard],
+      },
+      { path: 'lists', component: ListsComponent },
+      { path: 'messages', component: MessagesComponent },
+    ],
+  },
+  { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];

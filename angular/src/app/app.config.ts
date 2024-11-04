@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -12,13 +16,15 @@ import { loadingInterceptor } from './interceptors/loading.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([errorInterceptors, jwtInterceptor, loadingInterceptor])),
+    provideHttpClient(
+      withInterceptors([errorInterceptors, jwtInterceptor, loadingInterceptor])
+    ),
     provideAnimations(),
     provideToastr({
-      positionClass: 'toast-bottom-right'
+      positionClass: 'toast-bottom-right',
     }),
-    importProvidersFrom(NgxSpinnerModule)
-  ]
+    importProvidersFrom(NgxSpinnerModule),
+  ],
 };

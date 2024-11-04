@@ -1,0 +1,33 @@
+{
+  "workbench.iconTheme": "material-icon-theme",
+  "path-intellisense.mappings": {
+    "assets": "${workspaceFolder}/src/assets"
+  },
+  "fontAwesomeAutocomplete.preview.foregroundColor": "#3d59a7",
+  "fontAwesomeAutocomplete.triggerWord": "fa",
+  "editor.detectIndentation": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "gitflow.default.production": "prod",
+  "eslint.format.enable": true,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": ["typescript", "javascript", "html", "scss"],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.requireConfig": false,
+  "prettier.useEditorConfig": true
+}
